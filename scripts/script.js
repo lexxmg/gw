@@ -19,14 +19,9 @@ for (let i = 0; i < document.querySelectorAll('tbody')[8].rows.length; i++) {
     document.querySelectorAll('tbody')[8].rows[i].cells[j].querySelector('a').click();
     //confirm( document.querySelectorAll('tbody')[8].rows[i].cells[j].querySelector('a') );
 
-    for (let i = 0; i < 100; i++) {
-      console.log(i);
-    }
-
-
-    for (let val of document.body.querySelectorAll('a')) {
-      if ( /Собрать урожай.*/.test(val.textContent) ) {
-        //alert(val.textContent);
+    for (let val of document.body.getElementsByTagName('a')) {
+      if ( /Полить.*/.test(val.textContent) ) {
+        console.log(val.textContent);
         val.click();
       }
     }
