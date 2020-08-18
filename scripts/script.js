@@ -19,7 +19,8 @@ btn.textContent = 'кнопка';
 btn.style.cssText = 'width: 200px; height: 50px; position: absolute; z-index: 100';
 document.body.append(btn);
 
-btn.style.top = document.querySelectorAll('tbody')[5].rows[0].cells[1].getBoundingClientRect().top + 'px';
+const pad = +window.getComputedStyle( document.querySelectorAll('table')[5].rows[0].cells[1] ).paddingTop.substr(0, 1);
+(btn.style.top = document.querySelectorAll('tbody')[5].rows[0].cells[1].getBoundingClientRect().top + pad) + 'px';
 btn.style.left = document.querySelectorAll('tbody')[5].rows[0].cells[1].getBoundingClientRect().right + 'px';
 
 
