@@ -20,9 +20,12 @@ for (let i = 0; i < document.querySelectorAll('tbody')[8].rows.length; i++) {
     //confirm( document.querySelectorAll('tbody')[8].rows[i].cells[j].querySelector('a') );
 
     for (let val of document.body.getElementsByTagName('a')) {
-      if ( /Полить.*/.test(val.textContent) ) {
+      const btn = document.createElement('button');
+      if ( /Собрать.*/.test(val.textContent) ) {
+        val.appendChild(btn);
         console.log(val.textContent);
         val.click();
+
       }
     }
   }
