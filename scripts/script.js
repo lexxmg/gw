@@ -50,3 +50,15 @@ for (let i = 0; i < document.querySelectorAll('tbody')[8].rows.length; i++) {
     }
   }
 }
+
+function findElement(text) {
+  let reg = new RegExp(text + '.*');
+  //console.log(reg);
+
+  for (let val of document.body.getElementsByTagName('a')) {
+    if ( reg.test(val.textContent) ) {
+      console.log(val);
+      console.log(val.textContent);
+    }
+  }
+}
