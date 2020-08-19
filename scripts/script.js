@@ -35,15 +35,23 @@ for (let val of document.body.getElementsByTagName('a')) {
   }
 }
 
-function table(text) {
-  let i;
-  let j;
+function table() {
+  let i = 0;
+  let j = 0;
+  const rows = document.querySelectorAll('tbody')[8].rows.length;
+  const cells = document.querySelectorAll('tbody')[8].rows[i].cells.length;
 
-  for (i = 0; i < document.querySelectorAll('tbody')[8].rows.length; i++) {
-    for (j = 0; j < document.querySelectorAll('tbody')[8].rows[i].cells.length; j++) {
-      document.getElementsByTagName('tbody')[8].rows[i].cells[j].getElementsByTagName('a')[0].click();
+  return function() {
+    document.getElementsByTagName('tbody')[8].rows[i].cells[j].getElementsByTagName('a')[0].click();
+    j++;
+    if (j === cells) {
+      j = 0;
+      i++;
+    }
 
-      return () => j;
+    if (i === rows) {
+      j = 0;
+      i = 0;
     }
   }
 }
