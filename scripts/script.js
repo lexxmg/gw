@@ -38,27 +38,29 @@ for (let val of document.body.getElementsByTagName('a')) {
 for (let i = 0; i < document.querySelectorAll('tbody')[8].rows.length; i++) {
   for (let j = 0; j < document.querySelectorAll('tbody')[8].rows[i].cells.length; j++) {
     document.querySelectorAll('tbody')[8].rows[i].cells[j].querySelector('a').click();
-    //confirm( document.querySelectorAll('tbody')[8].rows[i].cells[j].querySelector('a') );
 
-    for (let val of document.body.getElementsByTagName('a')) {
-      if ( /Собрать.*/.test(val.textContent) ) {
-        val.appendChild(btn);
-        console.log(val.textContent);
-        val.click();
+    findElement('Собрать урожай').click();
+    console.log('click');
 
-      }
-    }
+    sleep(1000);
   }
 }
 
 function findElement(text) {
   let reg = new RegExp(text + '.*');
-  //console.log(reg);
 
   for (let val of document.body.getElementsByTagName('a')) {
     if ( reg.test(val.textContent) ) {
-      console.log(val);
-      console.log(val.textContent);
+      return val;
     }
   }
+}
+
+
+function sleep(milliseconds) {
+  const date = Date.now();
+  let currentDate = null;
+  do {
+    currentDate = Date.now();
+  } while (currentDate - date < milliseconds);
 }
