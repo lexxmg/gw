@@ -35,14 +35,16 @@ for (let val of document.body.getElementsByTagName('a')) {
   }
 }
 
-for (let i = 0; i < document.querySelectorAll('tbody')[8].rows.length; i++) {
-  for (let j = 0; j < document.querySelectorAll('tbody')[8].rows[i].cells.length; j++) {
-    document.querySelectorAll('tbody')[8].rows[i].cells[j].querySelector('a').click();
+function table(text) {
+  let i;
+  let j;
 
-    findElement('Собрать урожай').click();
-    console.log('click');
+  for (i = 0; i < document.querySelectorAll('tbody')[8].rows.length; i++) {
+    for (j = 0; j < document.querySelectorAll('tbody')[8].rows[i].cells.length; j++) {
+      document.getElementsByTagName('tbody')[8].rows[i].cells[j].getElementsByTagName('a')[0].click();
 
-    sleep(1000);
+      return () => j;
+    }
   }
 }
 
