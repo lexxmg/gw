@@ -41,9 +41,16 @@ function table() {
   const rows = document.querySelectorAll('tbody')[8].rows.length;
   const cells = document.querySelectorAll('tbody')[8].rows[i].cells.length;
 
-  return function() {
+  return function(t) {
     document.getElementsByTagName('tbody')[8].rows[i].cells[j].getElementsByTagName('a')[0].click();
     j++;
+
+    let el = findElement(t);
+
+    if (el) {
+      el.click();
+    }
+
     if (j === cells) {
       j = 0;
       i++;
