@@ -19,19 +19,19 @@ const positionLeft = document.querySelector('#main_ferma_window table').offsetLe
 const width = document.querySelector('#main_ferma_window table').offsetWidth;
 
 const btnContainer = document.createElement('div');
-btnContainer.style.cssText = 'position: absolute; width: 200px; height: 50px; background: red';
+btnContainer.style.cssText = 'position: absolute;';
 document.body.append(btnContainer);
 btnContainer.style.top = (positionTop + 3) + 'px';
 btnContainer.style.left = (positionLeft + width) + 'px';
 
 const btn = document.createElement('button');
 btn.textContent = 'кнопка';
-btn.style.cssText = 'width: 200px; height: 50px; position: absolute; z-index: 100';
-document.body.append(btn);
+btn.style.cssText = 'width: 200px; height: 50px;';
+btnContainer.append(btn);
 
-const pad = +window.getComputedStyle( document.querySelectorAll('table')[5].rows[0].cells[1] ).paddingTop.substr(0, 1);
-(btn.style.top = document.querySelectorAll('tbody')[5].rows[0].cells[1].getBoundingClientRect().top + pad) + 'px';
-btn.style.left = document.querySelectorAll('tbody')[5].rows[0].cells[1].getBoundingClientRect().right + 'px';
+// const pad = +window.getComputedStyle( document.querySelectorAll('table')[5].rows[0].cells[1] ).paddingTop.substr(0, 1);
+// (btn.style.top = document.querySelectorAll('tbody')[5].rows[0].cells[1].getBoundingClientRect().top + pad) + 'px';
+// btn.style.left = document.querySelectorAll('tbody')[5].rows[0].cells[1].getBoundingClientRect().right + 'px';
 
 
 // for (let val of document.body.getElementsByTagName('a')) {
@@ -47,7 +47,7 @@ btn.style.left = document.querySelectorAll('tbody')[5].rows[0].cells[1].getBound
 
 const clickElement = createClickTable();
 
-btn.addEventListener('click', function(){
+btn.addEventListener('click', function() {
   let ret = clickElement();
 
   console.log('click' + ' ' + ret);
