@@ -38,14 +38,22 @@ btn.style.left = document.querySelectorAll('tbody')[5].rows[0].cells[1].getBound
 const clickElement = createClickTable();
 
 btn.addEventListener('click', function(){
-  clickElement();
+  let ret = clickElement();
 
-  console.log('click');
+  console.log('click' + ' ' + ret);
   setTimeout(function(){
     let el = findElement('Собрать урожай');
     if (el) {
       el.click();
     }
+
+    let idTime = setTimeout(() => {
+      if (ret) {
+        clearTimeout(idTime);
+      } else {
+        btn.click();
+      }  
+    }, 300);
   }, 300);
 });
 
@@ -67,6 +75,7 @@ function createClickTable() {
     if (i === rows) {
       j = 0;
       i = 0;
+      return true;
     }
   }
 }
