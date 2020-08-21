@@ -14,7 +14,17 @@ for (let val of document.body.querySelectorAll('a')) {
   }
 }
 
-let btn = document.createElement('button');
+const positionTop = document.querySelector('#main_ferma_window table').offsetTop;
+const positionLeft = document.querySelector('#main_ferma_window table').offsetLeft;
+const width = document.querySelector('#main_ferma_window table').offsetWidth;
+
+const btnContainer = document.createElement('div');
+btnContainer.style.cssText = 'position: absolute; width: 200px; height: 50px; background: red';
+document.body.append(btnContainer);
+btnContainer.style.top = (positionTop + 3) + 'px';
+btnContainer.style.left = (positionLeft + width) + 'px';
+
+const btn = document.createElement('button');
 btn.textContent = 'кнопка';
 btn.style.cssText = 'width: 200px; height: 50px; position: absolute; z-index: 100';
 document.body.append(btn);
@@ -52,7 +62,7 @@ btn.addEventListener('click', function(){
         clearTimeout(idTime);
       } else {
         btn.click();
-      }  
+      }
     }, 300);
   }, 300);
 });
