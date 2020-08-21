@@ -24,32 +24,40 @@ const pad = +window.getComputedStyle( document.querySelectorAll('table')[5].rows
 btn.style.left = document.querySelectorAll('tbody')[5].rows[0].cells[1].getBoundingClientRect().right + 'px';
 
 
-for (let val of document.body.getElementsByTagName('a')) {
-  if ( /полить.*/.test(val.textContent) ) {
-    val.append(btn);
+// for (let val of document.body.getElementsByTagName('a')) {
+//   if ( /полить.*/.test(val.textContent) ) {
+//     val.append(btn);
+//
+//     btn.style.left = val.getBoundingClientRect().left + 'px';
+//     btn.style.top = val.getBoundingClientRect().bottom + 'px';
+//
+//     console.log(val.textContent);
+//   }
+// }
 
-    btn.style.left = val.getBoundingClientRect().left + 'px';
-    btn.style.top = val.getBoundingClientRect().bottom + 'px';
+const clickElement = createClickTable();
 
-    console.log(val.textContent);
-  }
-}
+btn.addEventListener('click', function(){
+  clickElement();
 
-function table() {
+  console.log('click');
+  setTimeout(function(){
+    let el = findElement('Собрать урожай');
+    if (el) {
+      el.click();
+    }
+  }, 300);
+});
+
+function createClickTable() {
   let i = 0;
   let j = 0;
   const rows = document.querySelectorAll('tbody')[8].rows.length;
   const cells = document.querySelectorAll('tbody')[8].rows[i].cells.length;
 
-  return function(t) {
+  return function() {
     document.getElementsByTagName('tbody')[8].rows[i].cells[j].getElementsByTagName('a')[0].click();
     j++;
-
-    let el = findElement(t);
-
-    if (el) {
-      el.click();
-    }
 
     if (j === cells) {
       j = 0;
