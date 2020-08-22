@@ -75,13 +75,15 @@ btn.addEventListener('click', function() {
       el.click();
     }
 
+    setTimeout(() => btnPlant.click(), 300);
+
     let idTime = setTimeout(() => {
       if (ret) {
         clearTimeout(idTime);
       } else {
         btn.click();
       }
-    }, 300);
+    }, 1000);
   }, 300);
 });
 
