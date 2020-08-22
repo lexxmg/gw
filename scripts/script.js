@@ -26,8 +26,13 @@ btnContainer.style.left = (positionLeft + width) + 'px';
 
 const btn = document.createElement('button');
 btn.textContent = 'кнопка';
-btn.style.cssText = 'width: 200px; height: 50px;';
+btn.style.cssText = 'display: block; width: 200px; height: 50px;';
 btnContainer.append(btn);
+
+const btnPlant = document.createElement('button');
+btnPlant.textContent = 'Посадить';
+btnPlant.style.cssText = 'display: block; width: 200px; height: 50px; margin-top: 10px';
+btnContainer.append(btnPlant);
 
 // const pad = +window.getComputedStyle( document.querySelectorAll('table')[5].rows[0].cells[1] ).paddingTop.substr(0, 1);
 // (btn.style.top = document.querySelectorAll('tbody')[5].rows[0].cells[1].getBoundingClientRect().top + pad) + 'px';
@@ -44,8 +49,21 @@ btnContainer.append(btn);
 //     console.log(val.textContent);
 //   }
 // }
-
+//document.getElementById("btn_poganka").checked=true;
+//document.getElementsByClassName('mainbutton')[2].click();
 const clickElement = createClickTable();
+
+btnPlant.addEventListener('click', function() {
+  const poganka = document.getElementById('btn_poganka');
+  const findBtn = document.getElementsByClassName('mainbutton')[2];
+
+  if (poganka && poganka.checked) {
+    findBtn.click();
+  } else if (poganka) {
+    poganka.click();
+    setTimeout(() => btnPlant.click(), 300);
+  }
+});
 
 btn.addEventListener('click', function() {
   let ret = clickElement();
