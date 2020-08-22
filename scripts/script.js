@@ -70,26 +70,30 @@ btn.addEventListener('click', function() {
 
   console.log('click' + ' ' + ret);
   setTimeout(function(){
-    let el = findElement('Собрать урожай');
-    let elP = findElement('Полить');
+    if ( findBot('Нажмите') ) {
+      console.log('Защита от робота' + ' ' + 'STOP!!');
+    } else {
+      let el = findElement('Собрать урожай');
+      let elP = findElement('Полить');
 
-    if (el) {
-      el.click();
-    }
-
-    if (elP) {
-      elP.click();
-    }
-
-    setTimeout(() => btnPlant.click(), 300);
-
-    let idTime = setTimeout(() => {
-      if (ret) {
-        clearTimeout(idTime);
-      } else {
-        btn.click();
+      if (el) {
+        el.click();
       }
-    }, 1000);
+
+      if (elP) {
+        elP.click();
+      }
+
+      setTimeout(() => btnPlant.click(), 300);
+
+      let idTime = setTimeout(() => {
+        if (ret) {
+          clearTimeout(idTime);
+        } else {
+          btn.click();
+        }
+      }, 1000);
+    }
   }, 300);
 });
 
@@ -111,6 +115,16 @@ function createClickTable() {
     if (i === rows) {
       j = 0;
       i = 0;
+      return true;
+    }
+  }
+}
+
+function findBot(text) {
+  let reg = new RegExp(text + '.*');
+
+  for (let val of document.body.getElementsByTagName('td')) {
+    if ( reg.test(val.textContent) ) {
       return true;
     }
   }
