@@ -71,8 +71,14 @@ btn.addEventListener('click', function() {
   console.log('click' + ' ' + ret);
   setTimeout(function(){
     let el = findElement('Собрать урожай');
+    let elP = findElement('Полить');
+
     if (el) {
       el.click();
+    }
+
+    if (elP) {
+      elP.click();
     }
 
     setTimeout(() => btnPlant.click(), 300);
