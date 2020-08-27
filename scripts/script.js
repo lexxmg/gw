@@ -39,25 +39,25 @@ btnPour.style.cssText = styleBtn;
 btnPour.style.marginTop = '3px';
 btnContainer.append(btnPour);
 
-btn.addEventListener('mouseover', () => {
-  btn.style.backgroundColor = '#DCEBDC';
-  btn.style.color = 'black';
+btnContainer.addEventListener('mouseover', (event) => {
+  let target = event.target;
+
+  if (target.tagName === 'BUTTON') {
+    target.style.backgroundColor = '#DCEBDC';
+    target.style.color = 'black';
+  }
 });
 
-btn.addEventListener('mouseout', () => {
-  btn.style.backgroundColor = '#CAEBCA';
-  btn.style.color = '#8E0002';
+btnContainer.addEventListener('mouseout', (event) => {
+  let target = event.target;
+
+  if (target.tagName === 'BUTTON') {
+    target.style.backgroundColor = '#CAEBCA';
+    target.style.color = '#8E0002';
+  }
 });
 
-btnPour.addEventListener('mouseover', () => {
-  btnPour.style.backgroundColor = '#DCEBDC';
-  btnPour.style.color = 'black';
-});
 
-btnPour.addEventListener('mouseout', () => {
-  btnPour.style.backgroundColor = '#CAEBCA';
-  btnPour.style.color = '#8E0002';
-});
 
 
 
