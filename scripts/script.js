@@ -1,22 +1,67 @@
 'use strict';
 
+const fermContainer = document.getElementById('main_ferma_window'),
+      fermInner = fermContainer.getElementsByTagName('table')[0],
+      fermTable = fermContainer.getElementsByTagName('table')[3],
+      fermControlTable = fermContainer.getElementsByTagName('table')[6],
+      positionFermTop = fermInner.offsetTop,
+      positionFermLeft = fermInner.offsetLeft,
+      widthFerm = fermInner.offsetWidth,
+      btnContainer = document.createElement('div'),
+      btn = document.createElement('button'),
+      btnPour = document.createElement('button');
 
-for (let val of document.body.querySelectorAll('a')) {
-  if ( /Отремонтировать.*/.test(val.textContent) ) {
-    confirm = true;
-    val.click();
+const styleBtn = 'display: block;' +
+                 'width: 200px;' +
+                 'height: 50px;' +
+                 'background-color: #CAEBCA;' +
+                 'border: 1px;' +
+                 'border-style: solid;' +
+                 'border-color: #CAEBCA;' +
+                 'color: #8E0002;' +
+                 'font-size: 16px;' +
+                 'font-weight: 500;' +
+                 'cursor: pointer;';
 
-    for (let val of document.body.querySelectorAll('a')) {
-      if ( /Левая.*/.test(val.textContent) ) {
-        val.click();
-      }
-    }
-  }
-}
+btnContainer.style.position = 'absolute';
+btnContainer.style.zIndex = 100;
+btnContainer.style.top = (positionFermTop) + 3 + 'px';
+btnContainer.style.left = (positionFermLeft + widthFerm) + 'px';
 
-const positionTop = document.querySelector('#main_ferma_window table').offsetTop;
-const positionLeft = document.querySelector('#main_ferma_window table').offsetLeft;
-const width = document.querySelector('#main_ferma_window table').offsetWidth;
+document.body.append(btnContainer);
+
+btn.style.cssText = styleBtn;
+btn.innerHTML = 'Собрать';
+btnContainer.append(btn);
+
+btnPour.innerHTML = 'Полить';
+btnPour.style.cssText = styleBtn;
+btnPour.style.marginTop = '3px';
+btnContainer.append(btnPour);
+
+btn.addEventListener('mouseover', () => {
+  btn.style.backgroundColor = '#DCEBDC';
+  btn.style.color = 'black';
+});
+
+btn.addEventListener('mouseout', () => {
+  btn.style.backgroundColor = '#CAEBCA';
+  btn.style.color = '#8E0002';
+});
+
+btnPour.addEventListener('mouseover', () => {
+  btnPour.style.backgroundColor = '#DCEBDC';
+  btnPour.style.color = 'black';
+});
+
+btnPour.addEventListener('mouseout', () => {
+  btnPour.style.backgroundColor = '#CAEBCA';
+  btnPour.style.color = '#8E0002';
+});
+
+
+
+
 
 const btnContainer = document.createElement('div');
 btnContainer.style.cssText = 'position: absolute;';
