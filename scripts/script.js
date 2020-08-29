@@ -1,32 +1,32 @@
 'use strict';
 
-const fermContainer = document.getElementById('main_ferma_window'),
+const fermContainer = main_ferma_window,
       fermInner = fermContainer.getElementsByTagName('table')[0],
       fermTable = fermContainer.getElementsByTagName('table')[3],
       fermControlTable = fermContainer.getElementsByTagName('table')[6],
-      positionFermTop = fermInner.offsetTop,
-      positionFermLeft = fermInner.offsetLeft,
-      widthFerm = fermInner.offsetWidth,
+      coordsFerm = fermInner.getBoundingClientRect(),
       btnContainer = document.createElement('div'),
       btn = document.createElement('button'),
       btnPour = document.createElement('button');
 
-const styleBtn = 'display: block;' +
-                 'width: 200px;' +
-                 'height: 50px;' +
-                 'background-color: #CAEBCA;' +
-                 'border: 1px;' +
-                 'border-style: solid;' +
-                 'border-color: #CAEBCA;' +
-                 'color: #8E0002;' +
-                 'font-size: 16px;' +
-                 'font-weight: 500;' +
-                 'cursor: pointer;';
+const styleBtn = `display: block;
+                  width: 200px;
+                  height: 50px;
+                  background-color: #CAEBCA;
+                  border: 1px;
+                  border-style: solid;
+                  border-color: #CAEBCA;
+                  color: #8E0002;
+                  font-size: 16px;
+                  font-weight: 500;
+                  cursor: pointer;
+                 `;
+
 
 btnContainer.style.position = 'absolute';
 btnContainer.style.zIndex = 100;
-btnContainer.style.top = (positionFermTop) + 3 + 'px';
-btnContainer.style.left = (positionFermLeft + widthFerm) + 'px';
+btnContainer.style.top = (coordsFerm.top + pageYOffset + 3) + 'px';
+btnContainer.style.left = (coordsFerm.right + pageXOffset) + 'px';
 
 document.body.append(btnContainer);
 
@@ -42,7 +42,7 @@ btnContainer.append(btnPour);
 btnContainer.addEventListener('mouseover', (event) => {
   let target = event.target;
 
-  if (target.tagName === 'BUTTON') {
+  if ( target.matches('BUTTON') ) {
     target.style.backgroundColor = '#DCEBDC';
     target.style.color = 'black';
   }
@@ -51,7 +51,7 @@ btnContainer.addEventListener('mouseover', (event) => {
 btnContainer.addEventListener('mouseout', (event) => {
   let target = event.target;
 
-  if (target.tagName === 'BUTTON') {
+  if ( target.matches('BUTTON') ) {
     target.style.backgroundColor = '#CAEBCA';
     target.style.color = '#8E0002';
   }
