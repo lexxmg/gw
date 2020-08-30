@@ -57,6 +57,63 @@ btnContainer.addEventListener('mouseout', (event) => {
   }
 });
 
+const enumerationCell = makeEnumerationCell(fermTable);
+
+btn.addEventListener('click', () => {
+  autoClickCells(300);
+});
+
+function makeEnumerationCell(table) {
+  let row = 0;
+  let cell = 0;
+  const countRows = table.rows.length;
+  const countCells = table.rows[row].cells.length;
+
+  return function() {
+    if (row < countRows) {
+      const obj = table.rows[row].cells[cell];
+      cell++;
+
+      if (cell === countCells) {
+        cell = 0;
+        row++;
+      }
+
+      return obj;
+    } else {
+      row = 0;
+      return false;
+    }
+  }
+}
+
+function autoClickCells(time) {
+  if ( findBot('Автоматическая') ) {
+    console.log('Защита от робота');
+  } else {
+    const cell = enumerationCell();
+
+    if (cell) {
+      cell.firstChild.click();
+
+      setTimeout(() => {
+        autoClickCells(time);
+      }, time);
+    } else {
+      return;
+    }
+  }
+}
+
+function findBot(text) {
+  let reg = new RegExp(text + '.*');
+
+  for (let val of document.body.getElementsByTagName('td')) {
+    if ( reg.test(val.textContent) ) {
+      return true;
+    }
+  }
+}
 
 
 
