@@ -60,8 +60,39 @@ btnContainer.addEventListener('mouseout', (event) => {
 const enumerationCell = makeEnumerationCell(fermTable);
 
 btn.addEventListener('click', () => {
-  autoClickCells(300);
+  clickCells();
 });
+
+btnPour.addEventListener('click', () => {
+  autoWatering();
+});
+
+function autoWatering() {
+  const click = clickCells();
+
+  if (click) {
+    setTimeout(() => {
+      watering();
+      autoWatering();
+    }, 300);
+  } else {
+    return;
+  }
+}
+
+function watering() {
+  if ( findBot('Ворота фермы закрыты') ) {
+    console.log('Защита от робота');
+  } else {
+    const el = findElement('Полить');
+    if (el) {
+      el.click();
+      return true;
+    } else {
+      return false;
+    }
+  }
+}
 
 function makeEnumerationCell(table) {
   let row = 0;
@@ -87,20 +118,17 @@ function makeEnumerationCell(table) {
   }
 }
 
-function autoClickCells(time) {
-  if ( findBot('Автоматическая') ) {
+function clickCells() {
+  if ( findBot('Ворота фермы закрыты') ) {
     console.log('Защита от робота');
   } else {
     const cell = enumerationCell();
 
     if (cell) {
       cell.firstChild.click();
-
-      setTimeout(() => {
-        autoClickCells(time);
-      }, time);
+      return true;
     } else {
-      return;
+      return false;
     }
   }
 }
@@ -113,6 +141,18 @@ function findBot(text) {
       return true;
     }
   }
+  return false;
+}
+
+function findElement(text) {
+  let reg = new RegExp(text + '.*');
+
+  for (let val of document.body.getElementsByTagName('a')) {
+    if ( reg.test(val.textContent) ) {
+      return val;
+    }
+  }
+  return false;
 }
 
 
