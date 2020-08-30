@@ -87,7 +87,7 @@ function autoCollect() {
     setTimeout(() => {
       collect();
       autoCollect();
-    }, 300);
+    }, 400);
   } else {
     return;
   }
