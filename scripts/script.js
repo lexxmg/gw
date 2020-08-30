@@ -74,8 +74,10 @@ function autoWatering() {
   if (click) {
     setTimeout(() => {
       watering();
-      autoWatering();
-    }, 300);
+      setTimeout(() => {
+        autoWatering();
+      }, 200);
+    }, 200);
   } else {
     return;
   }
