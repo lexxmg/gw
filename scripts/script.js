@@ -60,7 +60,7 @@ btnContainer.addEventListener('mouseout', (event) => {
 const enumerationCell = makeEnumerationCell(fermTable);
 
 btn.addEventListener('click', () => {
-  clickCells();
+  autoCollect();
 });
 
 btnPour.addEventListener('click', () => {
@@ -80,11 +80,38 @@ function autoWatering() {
   }
 }
 
+function autoCollect() {
+  const click = clickCells();
+
+  if (click) {
+    setTimeout(() => {
+      collect();
+      autoCollect();
+    }, 300);
+  } else {
+    return;
+  }
+}
+
 function watering() {
   if ( findBot('Ворота фермы закрыты') ) {
     console.log('Защита от робота');
   } else {
     const el = findElement('Полить');
+    if (el) {
+      el.click();
+      return true;
+    } else {
+      return false;
+    }
+  }
+}
+
+function collect() {
+  if ( findBot('Ворота фермы закрыты') ) {
+    console.log('Защита от робота');
+  } else {
+    const el = findElement('Собрать урожай');
     if (el) {
       el.click();
       return true;
