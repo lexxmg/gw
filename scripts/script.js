@@ -1,3 +1,4 @@
+
 'use strict';
 
 
@@ -147,4 +148,17 @@ function sleep(milliseconds) {
   do {
     currentDate = Date.now();
   } while (currentDate - date < milliseconds);
+}
+
+let clickTimerIntervalId;
+
+function findInterval() {
+  clickTimerIntervalId = setInterval(() => {
+   for (let el of document.querySelectorAll('a') ) {
+      if (el.textContent === 'Полить Поганку') {
+          el.click();
+          clearTimeout(clickTimerIntervalId);
+      }
+    }
+  }, 50);
 }
