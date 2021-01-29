@@ -150,9 +150,11 @@ function sleep(milliseconds) {
   } while (currentDate - date < milliseconds);
 }
 
-let clickTimerIntervalId;
+
 
 function findInterval() {
+  let clickTimerIntervalId;
+
   clickTimerIntervalId = setInterval(() => {
    for (let el of document.querySelectorAll('a') ) {
       if (el.textContent === 'Полить Поганку') {
