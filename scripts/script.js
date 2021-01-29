@@ -205,3 +205,27 @@ function findElement(text) {
   }
   return false;
 }
+
+//findIntervalAnchor('Собрать урожай').then(() => console.log('ok')).catch(() => console.log('err'))
+
+function findIntervalAnchor(text) {
+  let clickTimerIntervalId;
+  let count = 0;
+
+  return new Promise(function(resolve, reject) {
+    clickTimerIntervalId = setInterval(() => {
+     count++;
+     for (let el of document.querySelectorAll('a') ) {
+        if (el.textContent === text) {
+          //el.click();
+          clearTimeout(clickTimerIntervalId);
+          resolve(el);
+        }
+      }
+      if (count === 200) {
+        clearTimeout(clickTimerIntervalId);
+        reject();
+      }
+    }, 50);
+  });
+}
