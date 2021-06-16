@@ -56,23 +56,23 @@ btnContainer.addEventListener('mouseover', (event) => {
 
 btnTest.addEventListener('click', () => {
   btnTest.disabled = true;
-  //const click = clickCells();
+  clickCells();
 
-  findInterval('Собрать урожай')
+  findInterval('Полить Поганку')
     .then(el => {
       console.log(el);
       //clickCells();
       el.click();
       btnTest.disabled = false;
       //if (click) btnTest.click();
-      clickCells();
+      //clickCells();
     })
     .catch(err => {
       console.log(err);
       btnTest.disabled = false;
       //clickCells();
       //if (click) btnTest.click();
-      clickCells();
+      //clickCells();
     });
 
 });
@@ -243,24 +243,39 @@ function findInterval(text) {
 
   return new Promise(function(resolve, reject) {
     clickTimerIntervalId = setInterval(() => {
-     count++;
+      count++;
 
-     let el = findElement(text);
-     if (el) resolve(el);
+      let el = findElement(text);
+      if (el) {
+        clearTimeout(clickTimerIntervalId);
+        resolve(el);
+      }
 
-     if ( findBot('Ворота фермы закрыты') ) reject('Защита от робота');
-     if ( findBot('Грядка пустая') ) reject('Грядка пустая');
-     if ( findBot('Дрессированый бобёр') ) reject('Дрессированый бобёр');
-     if ( findBot('Персонаж в мексиканской шляпе') ) reject('Персонаж в мексиканской шляпе');
-     if ( findBot('Защищает от нападений соседние грядки') ) reject('Защищает от нападений соседние грядки');
-     //if ( findBot('Персонаж в мексиканской шляпе') ) reject('Персонаж в мексиканской шляпе');
-     // for (let el of document.querySelectorAll('a') ) {
-     //    if ( reg.test(el.textContent) ) {
-     //      //el.click();
-     //      clearTimeout(clickTimerIntervalId);
-     //      resolve(el);
-     //    }
-     //  }
+      if ( findBot('Ворота фермы закрыты') ) {
+        clearTimeout(clickTimerIntervalId);
+        reject('Защита от робота');
+      }
+      if ( findBot('Грядка пустая') ) {
+        clearTimeout(clickTimerIntervalId);
+        reject('Грядка пустая');
+      }
+      if ( findBot('Дрессированый бобёр') ) {
+        clearTimeout(clickTimerIntervalId);
+        reject('Дрессированый бобёр');
+      }
+      if ( findBot('Персонаж в мексиканской шляпе') ) {
+        clearTimeout(clickTimerIntervalId);
+        reject('Персонаж в мексиканской шляпе');
+      }
+      if ( findBot('Защищает от нападений соседние грядки') ) {
+        clearTimeout(clickTimerIntervalId);
+        reject('Защищает от нападений соседние грядки');
+      }
+      if ( findBot('На этой грядке растет') ) {
+        clearTimeout(clickTimerIntervalId);
+        reject('На этой грядке растет');
+      }
+
       if (count === 200) {
         clearTimeout(clickTimerIntervalId);
         reject('время вышло');
