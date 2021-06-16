@@ -7,7 +7,8 @@ const fermContainer = main_ferma_window,
       coordsFerm = fermInner.getBoundingClientRect(),
       btnContainer = document.createElement('div'),
       btn = document.createElement('button'),
-      btnPour = document.createElement('button');
+      btnPour = document.createElement('button'),
+      btnTest = document.createElement('button');
 
 const styleBtn = `display: block;
                   width: 200px;
@@ -39,6 +40,11 @@ btnPour.style.cssText = styleBtn;
 btnPour.style.marginTop = '3px';
 btnContainer.append(btnPour);
 
+btnTest.innerHTML = 'тесет promise';
+btnTest.style.cssText = styleBtn;
+btnTest.style.marginTop = '3px';
+btnContainer.append(btnTest);
+
 btnContainer.addEventListener('mouseover', (event) => {
   let target = event.target;
 
@@ -46,6 +52,24 @@ btnContainer.addEventListener('mouseover', (event) => {
     target.style.backgroundColor = '#DCEBDC';
     target.style.color = 'black';
   }
+});
+
+btnTest.addEventListener('click', () => {
+  const click = clickCells();
+
+  findIntervalAnchor('Собрать урожай')
+    .then(el => {
+      console.log(el);
+      //clickCells();
+      el.click();
+      if (click) btnTest.click();
+    })
+    .catch(err => {
+      console.log(err);
+      //clickCells();
+      //if (click) btnTest.click();
+    });
+
 });
 
 btnContainer.addEventListener('mouseout', (event) => {
@@ -224,7 +248,7 @@ function findIntervalAnchor(text) {
       }
       if (count === 200) {
         clearTimeout(clickTimerIntervalId);
-        reject();
+        reject('время вышло');
       }
     }, 50);
   });
