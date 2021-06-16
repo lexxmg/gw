@@ -55,19 +55,24 @@ btnContainer.addEventListener('mouseover', (event) => {
 });
 
 btnTest.addEventListener('click', () => {
-  const click = clickCells();
+  btnTest.disabled = true;
+  //const click = clickCells();
 
-  findIntervalAnchor('Собрать урожай')
+  findInterval('Собрать урожай')
     .then(el => {
       console.log(el);
       //clickCells();
       el.click();
-      if (click) btnTest.click();
+      btnTest.disabled = false;
+      //if (click) btnTest.click();
+      clickCells();
     })
     .catch(err => {
       console.log(err);
+      btnTest.disabled = false;
       //clickCells();
       //if (click) btnTest.click();
+      clickCells();
     });
 
 });
@@ -232,20 +237,30 @@ function findElement(text) {
 
 //findIntervalAnchor('Собрать урожай').then(() => console.log('ok')).catch(() => console.log('err'))
 
-function findIntervalAnchor(text) {
+function findInterval(text) {
   let clickTimerIntervalId;
   let count = 0;
 
   return new Promise(function(resolve, reject) {
     clickTimerIntervalId = setInterval(() => {
      count++;
-     for (let el of document.querySelectorAll('a') ) {
-        if (el.textContent === text) {
-          //el.click();
-          clearTimeout(clickTimerIntervalId);
-          resolve(el);
-        }
-      }
+
+     let el = findElement(text);
+     if (el) resolve(el);
+
+     if ( findBot('Ворота фермы закрыты') ) reject('Защита от робота');
+     if ( findBot('Грядка пустая') ) reject('Грядка пустая');
+     if ( findBot('Дрессированый бобёр') ) reject('Дрессированый бобёр');
+     if ( findBot('Персонаж в мексиканской шляпе') ) reject('Персонаж в мексиканской шляпе');
+     if ( findBot('Защищает от нападений соседние грядки') ) reject('Защищает от нападений соседние грядки');
+     //if ( findBot('Персонаж в мексиканской шляпе') ) reject('Персонаж в мексиканской шляпе');
+     // for (let el of document.querySelectorAll('a') ) {
+     //    if ( reg.test(el.textContent) ) {
+     //      //el.click();
+     //      clearTimeout(clickTimerIntervalId);
+     //      resolve(el);
+     //    }
+     //  }
       if (count === 200) {
         clearTimeout(clickTimerIntervalId);
         reject('время вышло');
