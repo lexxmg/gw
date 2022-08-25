@@ -247,37 +247,37 @@ function findInterval(text) {
 
       let el = findElement(text);
       if (el) {
-        clearTimeout(clickTimerIntervalId);
+        clearInterval(clickTimerIntervalId);
         resolve(el);
       }
 
       if ( findBot('Ворота фермы закрыты') ) {
-        clearTimeout(clickTimerIntervalId);
+        clearInterval(clickTimerIntervalId);
         reject('Защита от робота');
       }
       if ( findBot('Грядка пустая') ) {
-        clearTimeout(clickTimerIntervalId);
+        clearInterval(clickTimerIntervalId);
         reject('Грядка пустая');
       }
       if ( findBot('Дрессированый бобёр') ) {
-        clearTimeout(clickTimerIntervalId);
+        clearInterval(clickTimerIntervalId);
         reject('Дрессированый бобёр');
       }
       if ( findBot('Персонаж в мексиканской шляпе') ) {
-        clearTimeout(clickTimerIntervalId);
+        clearInterval(clickTimerIntervalId);
         reject('Персонаж в мексиканской шляпе');
       }
       if ( findBot('Защищает от нападений соседние грядки') ) {
-        clearTimeout(clickTimerIntervalId);
+        clearInterval(clickTimerIntervalId);
         reject('Защищает от нападений соседние грядки');
       }
       if ( findBot('На этой грядке растет') ) {
-        clearTimeout(clickTimerIntervalId);
+        clearInterval(clickTimerIntervalId);
         reject('На этой грядке растет');
       }
 
       if (count === 200) {
-        clearTimeout(clickTimerIntervalId);
+        clearInterval(clickTimerIntervalId);
         reject('время вышло');
       }
     }, 50);
